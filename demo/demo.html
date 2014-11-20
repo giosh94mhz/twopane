@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TwoPane Demo</title>
+
+    <link rel="stylesheet" href="../test/libs/jquery-ui/themes/base/jquery-ui.css" media="screen">
+    <link rel="stylesheet" href="../dist/twopane.jqueryui.min.css" media="screen">
+
+    <style id="src-css">
+      #twopane {
+        width: 960px;
+        height: 300px;
+        border: 3px dotted #888
+      }
+
+      #twopane .left, #twopane .right {
+        height: 300px;
+        overflow: auto;
+      }
+
+      .linktocat {
+        width: 100%;
+        max-height: 295px;
+      }
+
+      pre { white-space: pre-wrap }
+
+    </style>
+</head>
+<body>
+
+    <h1>TwoPane Demo</h1>
+
+    <div id="twopane">
+      <p>noise 1</p>
+      <div class="right">
+        <img class="linktocat" src="https://octodex.github.com/images/linktocat.jpg" />
+      </div>
+      <p>noise 2</p>
+      <div class="left" style="background: #DDD">
+        Between this two elements there is an hidden handle to resize the panels.
+        <h2>html</h2>
+        <pre id="html"></pre>
+        <h2>CSS</h2>
+        <pre id="css"></pre>
+        <h2>JS</h2>
+        <pre id="js"></pre>
+      </div>
+      <p>noise 3</p>
+    </div>
+
+    
+    <script src="../test/libs/jquery/jquery.js"></script>
+    <script src="../test/libs/jquery-ui/jquery-ui.js"></script>
+    <script src="../dist/twopane.jqueryui.min.js"></script>
+
+    <!-- ignore this block -->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var html = $('#twopane').get(0).innerHTML.replace(/[\s\S] {6}/gi, "\n");
+        $('#html').text(html);
+        var css = $('#src-css').get(0).innerHTML.replace(/[\s\S] {6}/gi, "\n");
+        $('#css').text(css);
+      });
+    </script>
+
+    <script type="text/javascript" id="src-js">
+      $(document).ready(function() {
+        $('#twopane').twopane({
+          left: '.left',
+          right: '.right',
+          resizable: {
+            ghost: true // better resizable feedback
+          }
+        });
+      });
+    </script>
+
+    <!-- ignore this block -->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var js = $('#src-js').get(0).innerHTML.replace(/[\s\S] {6}/gi, "\n");
+        $('#js').text(js);
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+/node_modules/
+
+# Eclipse
+/.project
+/.buildpath
+/.settings/
+
+# Vim
+.*.s[a-w][a-z]

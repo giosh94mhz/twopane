@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TwoPane Test Suite</title>
+
+    <!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
+    <script src="./libs/jquery-loader.js"></script>
+
+    <!-- Load local QUnit (grunt requires v1.0.0 or newer). -->
+    <link rel="stylesheet" href="./libs/qunit/qunit.css" media="screen">
+    <script src="./libs/qunit/qunit.js"></script>
+
+    <!-- Load local lib and tests. -->
+    <script src="../src/twopane.jqueryui.js"></script>
+    <script src="twopane_test.js"></script>
+
+    <script>window._$ = jQuery.noConflict(true);</script>
+</head>
+<body>
+    <h1 id="qunit-header">TwoPane Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">
+        <div id="test-no-children"></div>
+        <div id="test-one-child">
+            <p>I'm the left pane</p>
+        </div>
+        <div id="test-two-children">
+            <p>I'm the left pane</p>
+            <p>I'm the right pane</p>
+        </div>
+        <div id="test-n-children">
+            <p>noise 1</p>
+            <p class="right">I'm the right pane</p>
+            <p>noise 2</p>
+            <p class="left">I'm the left pane</p>
+            <p>noise 3</p>
+        </div>
+    </div>
+</body>
+</html>
