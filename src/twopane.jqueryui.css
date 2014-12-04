@@ -3,6 +3,7 @@
     width: 100%;
     margin-bottom: 1em;
     border-collapse: collapse;
+    padding: 0;
 }
 
 .giosh94mhz-twopane .giosh94mhz-l-pane, .giosh94mhz-twopane .giosh94mhz-r-pane {
@@ -10,6 +11,7 @@
     vertical-align: top;
     height: inherit;
     width: auto;
+    padding: 0;
 }
 
 .giosh94mhz-twopane .giosh94mhz-l-pane {
