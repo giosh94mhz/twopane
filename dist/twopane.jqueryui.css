@@ -1,4 +1,4 @@
-/*! TwoPane Plugin - v0.1.0 - 2014-11-25
+/*! TwoPane Plugin - v0.2.0 - 2014-12-04
 * https://github.com/giosh94mhz/twopane
 * Copyright (c) 2014 Giorgio Premi; Licensed MIT */
 .giosh94mhz-twopane {
@@ -6,6 +6,7 @@
     width: 100%;
     margin-bottom: 1em;
     border-collapse: collapse;
+    padding: 0;
 }
 
 .giosh94mhz-twopane .giosh94mhz-l-pane, .giosh94mhz-twopane .giosh94mhz-r-pane {
@@ -13,6 +14,7 @@
     vertical-align: top;
     height: inherit;
     width: auto;
+    padding: 0;
 }
 
 .giosh94mhz-twopane .giosh94mhz-l-pane {

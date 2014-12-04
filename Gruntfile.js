@@ -40,9 +40,6 @@ module.exports = function(grunt) {
     },
     cssmin: {
         dist: {
-            options: {
-                stripBanners: true
-            },
             files: {
                 'dist/<%= pkg.name %>.jqueryui.min.css': '<%= concat.css.dest %>'
             }

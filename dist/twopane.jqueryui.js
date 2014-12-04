@@ -1,31 +1,13 @@
-/*! TwoPane Plugin - v0.1.0 - 2014-11-25
+/*! TwoPane Plugin - v0.2.0 - 2014-12-04
 * https://github.com/giosh94mhz/twopane
 * Copyright (c) 2014 Giorgio Premi; Licensed MIT */
-(function($) {
+(function($, undefined) {
     "user strict";
 
     // overridden options
     var optionsOverride = {
         handles: "w"
     };
-
-    $.widget("ui.resizable", $.ui.resizable, {
-        resizeTo: function(newSize, axis) {
-            if (axis === undefined) {
-                axis = 'se';
-            }
-            var start = new $.Event("mousedown", { pageX: 0, pageY: 0 });
-            this._mouseStart(start);
-            this.axis = axis;
-
-            var end = new $.Event("mouseup", {
-                pageX: newSize.width - this.originalSize.width,
-                pageY: newSize.height - this.originalSize.height
-            });
-            this._mouseDrag(end);
-            this._mouseStop(end);
-        }
-    });
 
     function trimMinMax(min, value, max) {
         if (min && value < min) {
@@ -36,14 +18,29 @@
         return value;
     }
 
+    function resizeTo(newSize, axis) {
+        if (axis === undefined) {
+            axis = 'se';
+        }
+        var start = new $.Event("mousedown", { pageX: 0, pageY: 0 });
+        this._mouseStart(start);
+        this.axis = axis;
+
+        var end = new $.Event("mouseup", {
+            pageX: newSize.width - this.originalSize.width,
+            pageY: newSize.height - this.originalSize.height
+        });
+        this._mouseDrag(end);
+        this._mouseStop(end);
+    }
+
     $.widget('giosh94mhz.twopane', {
         options: {
             left: '> *:nth-child(1)',
             right: '> *:nth-child(2)',
             resizable: {
                 helper: "ui-resizable-helper ui-corner-all"
-            },
-            iframeFix: false
+            }
         },
 
         _create: function () {
@@ -51,19 +48,27 @@
 
             this.oldContent = $('<div>');
 
-            this.element.children().appendTo(this.oldContent);
+            this.element.contents().appendTo(this.oldContent);
 
             // init panes
             this.left = this._createPane('left', this.options);
             this.right = this._createPane('right', this.options);
 
             this.right.resizable($.extend({}, this.options.resizable, optionsOverride));
+            this._addResizeTo(this.right);
 
+            // init shim
+            this.shim = this._createShim();
             this._on(this.element, {
                 resizestart: function() {
-                    this._blockFrames(this.options.iframeFix === true ? "iframe" : this.options.iframeFix);
+                    this.shim
+                        .outerWidth( this.element.outerWidth() )
+                        .outerHeight( this.element.outerHeight() )
+                        .show();
                 },
-                resizestop: this._unblockFrames
+                resizestop: function() {
+                    this.shim.hide();
+                }
             });
         },
 
@@ -92,12 +97,36 @@
             return pane;
         },
 
+        _createShim: function() {
+            return $( "<div>" )
+                .css({
+                    "position": "absolute",
+                    'z-index': 90
+                })
+                .addClass('ui-helper-hidden')
+                .insertBefore( this.element )
+                .outerWidth( this.element.outerWidth() )
+                .outerHeight( this.element.outerHeight() )
+                .offset( this.element.position() );
+        },
+
+        _addResizeTo: function(resizable) {
+            // jQuery < 1.11 use data, otherwise instance
+            var instance = null;
+            try {
+                instance = resizable.resizable("instance");
+            } catch(e) {
+                instance = resizable.data("ui-resizable");
+            }
+            instance.resizeTo = resizeTo;
+        },
+
         _destroy: function () {
             this.right.resizable("destroy");
-            this.oldContent.find('.placeholder-left').replaceWith(this.left.children());
-            this.oldContent.find('.placeholder-right').replaceWith(this.right.children());
-            this.element.children().remove();
-            this.element.append(this.oldContent.children());
+            this.oldContent.find('.placeholder-left').replaceWith(this.left.contents());
+            this.oldContent.find('.placeholder-right').replaceWith(this.right.contents());
+            this.element.contents().remove();
+            this.element.append(this.oldContent.contents());
         },
 
         _setOption: function (key, value) {
@@ -132,28 +161,7 @@
             if (size.width !== newSize.width || size.height !== newSize.height) {
                 this.right.resizable("resizeTo", newSize, "w");
             }
-        },
-
-        // from https://github.com/jquery/jquery-ui/blob/master/ui/draggable.js
-        _blockFrames: function( selector ) {
-            this.iframeBlocks = this.document.find( selector ).map(function() {
-                var iframe = $( this );
-                return $( "<div>" )
-                    .css( "position", "absolute" )
-                    .appendTo( iframe.parent() )
-                    .outerWidth( iframe.outerWidth() )
-                    .outerHeight( iframe.outerHeight() )
-                    .offset( iframe.offset() )[ 0 ];
-            });
-        },
-
-        _unblockFrames: function() {
-            if ( this.iframeBlocks ) {
-                this.iframeBlocks.remove();
-                delete this.iframeBlocks;
-            }
         }
-
     });
 
 }(jQuery));
