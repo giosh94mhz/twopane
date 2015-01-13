@@ -67,17 +67,18 @@
             this._on(this.element, {
                 resizestart: function() {
                     this.shim
+                        .show()
                         .outerWidth( this.element.outerWidth() )
                         .outerHeight( this.element.outerHeight() )
-                        .show();
+                        .offset( this.element.offset() );
                 },
                 resizestop: function() {
+                    // restore height on stop to correctly fill height
+                    this.right.css('height', 'inherit');
                     this.shim.hide();
                 }
             });
-        },
 
-        _init: function() {
             this._ensureResizableSize();
         },
 
@@ -108,11 +109,8 @@
                     "position": "absolute",
                     'z-index': 90
                 })
-                .addClass('ui-helper-hidden')
-                .insertBefore( this.element )
-                .outerWidth( this.element.outerWidth() )
-                .outerHeight( this.element.outerHeight() )
-                .offset( this.element.position() );
+                .addClass('giosh94mhz-twopane-shim ui-helper-hidden')
+                .appendTo( this.element.parent() );
         },
 
         _addResizeTo: function(resizable) {
