@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       css: {
         src: ['src/<%= pkg.name %>.jqueryui.css'],
         dest: 'dist/<%= pkg.name %>.jqueryui.css'
-      },
+      }
     },
     uglify: {
       options: {

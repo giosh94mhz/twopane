@@ -1,3 +1,3 @@
-/*! TwoPane Plugin - v0.2.0 - 2014-12-04
+/*! TwoPane Plugin - v0.3.0 - 2015-01-13
 * https://github.com/giosh94mhz/twopane
-* Copyright (c) 2014 Giorgio Premi; Licensed MIT */.giosh94mhz-twopane{display:table;width:100%;margin-bottom:1em;border-collapse:collapse;padding:0}.giosh94mhz-twopane .giosh94mhz-l-pane,.giosh94mhz-twopane .giosh94mhz-r-pane{display:table-cell;vertical-align:top;height:inherit;width:auto;padding:0}.giosh94mhz-twopane .giosh94mhz-l-pane{padding-right:7px}.giosh94mhz-twopane .giosh94mhz-r-pane{padding-left:4px}.giosh94mhz-twopane .ui-resizable-handle:hover{background:rgba(151,187,244,.2)}
+* Copyright (c) 2015 Giorgio Premi; Licensed MIT */.giosh94mhz-twopane{display:table;width:100%;margin-bottom:1em;border-collapse:collapse;padding:0}.giosh94mhz-twopane .giosh94mhz-l-pane,.giosh94mhz-twopane .giosh94mhz-r-pane{display:table-cell;vertical-align:top;height:inherit;width:auto;padding:0}.giosh94mhz-twopane .giosh94mhz-l-pane{padding-right:7px}.giosh94mhz-twopane .giosh94mhz-r-pane{padding-left:4px}.giosh94mhz-twopane .ui-resizable-handle:hover{background:rgba(151,187,244,.2)}
