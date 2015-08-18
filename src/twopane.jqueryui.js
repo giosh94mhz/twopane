@@ -157,12 +157,12 @@
                 height: this.right.outerHeight()
             };
             var resizable = this.options.resizable;
-            var newSize = {
+            var constrainedSize = {
                 width: trimMinMax(resizable.minWidth, size.width, resizable.maxWidth),
                 height: trimMinMax(resizable.minHeight, size.height, resizable.maxHeight)
             };
-            if (size.width !== newSize.width || size.height !== newSize.height) {
-                this.right.resizable("resizeTo", newSize, "w");
+            if (size.width !== constrainedSize.width || size.height !== constrainedSize.height) {
+                this.right.resizable("resizeTo", constrainedSize, "w");
             }
         }
     });
