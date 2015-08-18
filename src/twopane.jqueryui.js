@@ -60,7 +60,7 @@
             this.right = this._createPane('right', this.options);
 
             this.right.resizable($.extend({}, this.options.resizable, optionsOverride));
-            this._addResizeTo(this.right);
+            this._extendResizableWidget(this.right);
 
             // init shim
             this.shim = this._createShim();
@@ -113,7 +113,7 @@
                 .appendTo( this.element.parent() );
         },
 
-        _addResizeTo: function(resizable) {
+        _extendResizableWidget: function(resizable) {
             // jQuery < 1.11 use data, otherwise instance
             var instance = null;
             try {
@@ -122,6 +122,13 @@
                 instance = resizable.data("ui-resizable");
             }
             instance.resizeTo = resizeTo;
+
+            var origMouseStop = instance._mouseStop;
+            instance._mouseStop = function () {
+                // ignore position change, since width and height are enough for resizing
+                instance.position = instance.originalPosition;
+                return origMouseStop.apply(instance, arguments);
+            };
         },
 
         _destroy: function () {

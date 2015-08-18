@@ -1,6 +1,12 @@
-/*! TwoPane Plugin - v0.3.0 - 2015-01-13
-* https://github.com/giosh94mhz/twopane
-* Copyright (c) 2015 Giorgio Premi; Licensed MIT */
+/*
+ * TwoPane Plugin - v0.3.0
+ * jQuery UI plugin to handle a resizable two-pane view (commander-like :)
+ * https://github.com/giosh94mhz/twopane
+ *
+ * Copyright (C) 2015  Giorgio Premi
+ * Licensed under MIT License
+ * See LICENSE file for the full copyright notice.
+ */
 (function($, undefined) {
     "user strict";
 
@@ -55,7 +61,7 @@
             this.right = this._createPane('right', this.options);
 
             this.right.resizable($.extend({}, this.options.resizable, optionsOverride));
-            this._addResizeTo(this.right);
+            this._extendResizableWidget(this.right);
 
             // init shim
             this.shim = this._createShim();
@@ -108,7 +114,7 @@
                 .appendTo( this.element.parent() );
         },
 
-        _addResizeTo: function(resizable) {
+        _extendResizableWidget: function(resizable) {
             // jQuery < 1.11 use data, otherwise instance
             var instance = null;
             try {
@@ -117,6 +123,13 @@
                 instance = resizable.data("ui-resizable");
             }
             instance.resizeTo = resizeTo;
+
+            var origMouseStop = instance._mouseStop;
+            instance._mouseStop = function () {
+                // ignore position change, since width and height are enough for resizing
+                instance.position = instance.originalPosition;
+                return origMouseStop.apply(instance, arguments);
+            };
         },
 
         _destroy: function () {
@@ -152,12 +165,12 @@
                 height: this.right.outerHeight()
             };
             var resizable = this.options.resizable;
-            var newSize = {
+            var constrainedSize = {
                 width: trimMinMax(resizable.minWidth, size.width, resizable.maxWidth),
                 height: trimMinMax(resizable.minHeight, size.height, resizable.maxHeight)
             };
-            if (size.width !== newSize.width || size.height !== newSize.height) {
-                this.right.resizable("resizeTo", newSize, "w");
+            if (size.width !== constrainedSize.width || size.height !== constrainedSize.height) {
+                this.right.resizable("resizeTo", constrainedSize, "w");
             }
         }
     });

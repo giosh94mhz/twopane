@@ -22,6 +22,10 @@
     padding-left: 4px;
 }
 
+.giosh94mhz-r-pane .ui-resizable-e {
+    cursor: col-resize;
+}
+
 /* default hover effect, in case no ghost/helper/... is used */
 .giosh94mhz-twopane .ui-resizable-handle:hover {
     background: rgba(151, 187, 244, 0.2);

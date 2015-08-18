@@ -1,6 +1,12 @@
-/*! TwoPane Plugin - v0.3.0 - 2015-01-13
-* https://github.com/giosh94mhz/twopane
-* Copyright (c) 2015 Giorgio Premi; Licensed MIT */
+/*
+ * TwoPane Plugin - v0.3.0
+ * jQuery UI plugin to handle a resizable two-pane view (commander-like :)
+ * https://github.com/giosh94mhz/twopane
+ *
+ * Copyright (C) 2015  Giorgio Premi
+ * Licensed under MIT License
+ * See LICENSE file for the full copyright notice.
+ */
 .giosh94mhz-twopane {
     display: table;
     width: 100%;
@@ -23,6 +29,10 @@
 
 .giosh94mhz-twopane .giosh94mhz-r-pane {
     padding-left: 4px;
+}
+
+.giosh94mhz-r-pane .ui-resizable-e {
+    cursor: col-resize;
 }
 
 /* default hover effect, in case no ghost/helper/... is used */
