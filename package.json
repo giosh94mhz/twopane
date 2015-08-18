@@ -2,7 +2,7 @@
   "name": "twopane",
   "title": "TwoPane Plugin",
   "description": "jQuery UI plugin to handle a resizable two-pane view (commander-like :)",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/giosh94mhz/twopane",
   "author": {
     "name": "Giorgio Premi",

@@ -1,5 +1,5 @@
 /*
- * TwoPane Plugin - v0.3.0
+ * TwoPane Plugin - v0.3.1
  * jQuery UI plugin to handle a resizable two-pane view (commander-like :)
  * https://github.com/giosh94mhz/twopane
  *
