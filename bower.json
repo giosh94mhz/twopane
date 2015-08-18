@@ -1,0 +1,37 @@
+{
+	"name": "twopane",
+	"version": "0.3.0",
+	"homepage": "https://github.com/giosh94mhz/twopane.git",
+	"authors": [
+		"Giorgio Premi <giosh94mhz@gmail.com>"
+	],
+	"description": "jQuery UI plugin to handle a resizable two-pane view (commander-like :)",
+	"main": "src/twopane.jqueryui.js",
+	"ignore": [
+		".editorconfig",
+		".git",
+		".gitignore",
+		".npmignore",
+		".travis.yml",
+		".yo-rc.json",
+		"Gruntfile.js",
+		"README.md",
+		"bower.json",
+		"demo",
+		"package.json",
+		"src"
+	],
+	"keywords": [
+		"jquery",
+		"jquery-ui",
+		"resizable",
+		"twopane",
+		"two panel",
+		"commander"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/giosh94mhz/twopane.git"
+	}
+}
